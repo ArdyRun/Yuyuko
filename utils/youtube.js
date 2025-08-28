@@ -27,14 +27,18 @@ async function getYouTubeVideoInfo(videoId) {
             return {
                 title: snippet.title,
                 duration: duration, // in seconds
-                thumbnail: snippet.thumbnails?.high?.url || snippet.thumbnails?.default?.url
+                thumbnail: snippet.thumbnails?.maxres?.url || 
+                          snippet.thumbnails?.high?.url || 
+                          snippet.thumbnails?.medium?.url || 
+                          snippet.thumbnails?.default?.url || 
+                          null
             };
         }
         
         return null;
     } catch (error) {
         console.error("YouTube API Error:", error.response?.data || error.message);
-        throw error;
+        return null;
     }
 }
 
