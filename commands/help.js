@@ -25,13 +25,14 @@ module.exports = {
         .setDescription("Here are some commands and their functions:")
         .addFields(
           {
-            name: "/immersion `[media] [amount] [title (optional)] [comment (optional)]`",
+            name: "/immersion `[media] [amount] [title (optional)] [comment (optional)] [date (optional)]`",
             value:
               "Log your Japanese immersion activity with automatic support for YouTube, AniList, and VNDB data.\n" +
               "- `media`: Type of media like `anime`, `manga`, `visual_novel`, `book`, `reading`, `listening`, or `reading_time`.\n" +
               "- `amount`: The amount of immersion (in minutes/pages/episodes/characters).\n" +
               "- `title` (optional): Title of the media (with autocomplete and metadata fetching).\n" +
               "- `comment` (optional): Any notes or thoughts.\n" +
+              "- `date` (optional): Date in YYYY-MM-DD format (e.g., 2024-01-15) to log for a past date.\n" +
               "For listening via YouTube, the bot auto-fetches title, duration, and thumbnail.",
           },
           {
@@ -82,16 +83,6 @@ module.exports = {
               "You'll be shown a list of available animated emojis to choose from.",
           },
           {
-            name: "/customdate `[date] [media] [amount] [title (optional)]`",
-            value:
-              "Add immersion log for a custom date to restore lost streak.\n" +
-              "- `date`: Date in YYYY-MM-DD format (e.g., 2024-01-15).\n" +
-              "- `media`: Type of media like `reading`, `listening`, `anime`, etc.\n" +
-              "- `amount`: The amount of immersion (in minutes/pages/episodes/characters).\n" +
-              "- `title` (optional): Title of the media.\n" +
-              "Use this when your streak was lost due to maintenance or other issues.",
-          },
-          {
             name: "/help `[language (optional)]`",
             value: "View this bot's usage guide.\n" +
                    "- `language` (optional): Choose guide language (`id`/`en`). Default: `id`.",
@@ -127,13 +118,14 @@ module.exports = {
         .setDescription("Berikut beberapa command dan fungsinya:")
         .addFields(
           {
-            name: "/immersion `[media] [amount] [title (opsional)] [comment (opsional)]`",
+            name: "/immersion `[media] [amount] [title (opsional)] [comment (opsional)] [date (opsional)]`",
             value:
               "Catat aktivitas immersion bahasa Jepang kamu secara otomatis, termasuk pengambilan info dari YouTube, AniList, dan VNDB.\n" +
               "- `media`: Jenis media seperti `anime`, `manga`, `visual_novel`, `book`, `reading`, `listening`, `reading_time`.\n" +
               "- `amount`: Jumlah aktivitas (menit/halaman/episode/karakter).\n" +
               "- `title` (opsional): Judul media (mendukung autocomplete dan info otomatis).\n" +
               "- `comment` (opsional): Catatan atau komentar tambahan.\n" +
+              "- `date` (opsional): Tanggal dalam format YYYY-MM-DD (contoh: 2024-01-15) untuk mencatat aktivitas di tanggal lalu.\n" +
               "Untuk listening via YouTube, bot akan otomatis mengambil judul, durasi, dan thumbnail.",
           },
           {
@@ -183,16 +175,6 @@ module.exports = {
               "- `message`: ID atau link pesan yang ingin diberi react.\n" +
               "Setelah itu kamu akan diberi pilihan emoji animasi yang tersedia.",
           },
-          {
-            name: "/customdate `[date] [media] [amount] [title (opsional)]`",
-            value:
-              "Tambahkan log immersion untuk tanggal khusus untuk memperbaiki streak yang hilang.\n" +
-              "- `date`: Tanggal dalam format YYYY-MM-DD (contoh: 2024-01-15).\n" +
-              "- `media`: Jenis media seperti `reading`, `listening`, `anime`, dll.\n" +
-              "- `amount`: Jumlah aktivitas (menit/halaman/episode/karakter).\n" +
-              "- `title` (opsional): Judul media.\n" +
-              "Gunakan ini ketika streak kamu hilang karena maintenance atau masalah lain.",
-          }
           {
             name: "/help `[language (opsional)]`",
             value: "Lihat panduan penggunaan bot ini.\n" +

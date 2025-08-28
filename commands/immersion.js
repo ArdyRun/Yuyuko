@@ -61,6 +61,7 @@ module.exports = {
     let amount = interaction.options.getNumber("amount");
     let title = interaction.options.getString("title") || "-";
     const comment = interaction.options.getString("comment") || "-";
+    const customDate = interaction.options.getString("date");
     const user = interaction.user;
     let thumbnail = null;
     let rawTitle = title;
@@ -68,6 +69,56 @@ module.exports = {
     let anilistInfo = null;
     let vndbInfo = null;
     let url = null;
+
+    // Validate custom date if provided
+    let inputDate, localDate, dateStr, now;
+    if (customDate) {
+      // Validate date format
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(customDate)) {
+        return await interaction.editReply({
+          content: "Invalid date format. Please use YYYY-MM-DD (e.g., 2024-01-15)."
+        });
+      }
+
+      inputDate = new Date(customDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Validate date is not in the future
+      if (inputDate > today) {
+        return await interaction.editReply({
+          content: "Cannot log immersion for future dates."
+        });
+      }
+
+      // Validate date is not too old (more than 1 year)
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+      
+      if (inputDate < oneYearAgo) {
+        return await interaction.editReply({
+          content: "Cannot log immersion for dates older than 1 year."
+        });
+      }
+
+      // Use custom date
+      localDate = new Date(customDate);
+      dateStr = customDate;
+      now = new Date(); // For database timestamps
+    } else {
+      // Use today's date
+      now = new Date();
+      localDate = new Date(
+        now.getFullYear(), now.getMonth(), now.getDate()
+      );
+      
+      dateStr = [
+        localDate.getFullYear(),
+        String(localDate.getMonth() + 1).padStart(2, '0'),
+        String(localDate.getDate()).padStart(2, '0')
+      ].join('-');
+    }
 
     // Listening URL logic with YouTube API
     if (media_type === "listening") {
@@ -203,17 +254,6 @@ module.exports = {
     const unit = unitMap[media_type];
     const label = labelMap[media_type];
     
-    const now = new Date();
-    const localDate = new Date(
-      now.getFullYear(), now.getMonth(), now.getDate()
-    );
-    
-    const dateStr = [
-      localDate.getFullYear(),
-      String(localDate.getMonth() + 1).padStart(2, '0'),
-      String(localDate.getDate()).padStart(2, '0')
-    ].join('-');
-
     try {
       // Get image URL
       let imageUrl = null;
@@ -260,7 +300,7 @@ module.exports = {
           } : null
         },
         timestamps: {
-          created: now,
+          created: customDate ? new Date() : now,
           date: dateStr,
           month: dateStr.slice(0, 7),
           year: localDate.getFullYear()
@@ -313,7 +353,7 @@ module.exports = {
           ...currentData.stats[media_type],
           total: newTotal,
           sessions: newSessions,
-          lastActivity: now,
+          lastActivity: customDate ? new Date() : now,
           unit: unit,
           label: label
         };
@@ -329,7 +369,7 @@ module.exports = {
           username: user.username,
           displayName: user.displayName || user.username,
           avatar: user.displayAvatarURL({ size: 64 }),
-          lastSeen: now
+          lastSeen: customDate ? new Date() : now
         };
         
         // Update summary
@@ -344,15 +384,15 @@ module.exports = {
         currentData.summary = {
           ...currentData.summary,
           totalSessions: totalSessions,
-          lastActivity: now,
-          joinDate: currentData.summary?.joinDate || now,
+          lastActivity: customDate ? new Date() : now,
+          joinDate: currentData.summary?.joinDate || (customDate ? new Date() : now),
           activeTypes: Object.keys(currentData.stats)
         };
         
         // Update timestamps
         currentData.timestamps = {
-          updated: now,
-          lastLog: now
+          updated: customDate ? new Date() : now,
+          lastLog: customDate ? new Date() : now
         };
         
         // Write the updated data
@@ -452,7 +492,7 @@ module.exports = {
 
     } catch (err) {
       console.error("Error in immersion command:", err);
-      await interaction.editReply({ content: "❌ Gagal mencatat immersion. Error: " + err.message });
+      await interaction.editReply({ content: "Gagal mencatat immersion. Error: " + err.message });
     }
   },
 
