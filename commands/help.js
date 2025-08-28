@@ -82,6 +82,16 @@ module.exports = {
               "You'll be shown a list of available animated emojis to choose from.",
           },
           {
+            name: "/customdate `[date] [media] [amount] [title (optional)]`",
+            value:
+              "Add immersion log for a custom date to restore lost streak.\n" +
+              "- `date`: Date in YYYY-MM-DD format (e.g., 2024-01-15).\n" +
+              "- `media`: Type of media like `reading`, `listening`, `anime`, etc.\n" +
+              "- `amount`: The amount of immersion (in minutes/pages/episodes/characters).\n" +
+              "- `title` (optional): Title of the media.\n" +
+              "Use this when your streak was lost due to maintenance or other issues.",
+          },
+          {
             name: "/help `[language (optional)]`",
             value: "View this bot's usage guide.\n" +
                    "- `language` (optional): Choose guide language (`id`/`en`). Default: `id`.",
@@ -173,6 +183,16 @@ module.exports = {
               "- `message`: ID atau link pesan yang ingin diberi react.\n" +
               "Setelah itu kamu akan diberi pilihan emoji animasi yang tersedia.",
           },
+          {
+            name: "/customdate `[date] [media] [amount] [title (opsional)]`",
+            value:
+              "Tambahkan log immersion untuk tanggal khusus untuk memperbaiki streak yang hilang.\n" +
+              "- `date`: Tanggal dalam format YYYY-MM-DD (contoh: 2024-01-15).\n" +
+              "- `media`: Jenis media seperti `reading`, `listening`, `anime`, dll.\n" +
+              "- `amount`: Jumlah aktivitas (menit/halaman/episode/karakter).\n" +
+              "- `title` (opsional): Judul media.\n" +
+              "Gunakan ini ketika streak kamu hilang karena maintenance atau masalah lain.",
+          }
           {
             name: "/help `[language (opsional)]`",
             value: "Lihat panduan penggunaan bot ini.\n" +

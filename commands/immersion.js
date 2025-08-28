@@ -5,85 +5,7 @@ const { updateUserStreak } = require("../utils/streak");
 const { getUserStreakByMedia, getUserStreak } = require("../utils/streak"); 
 const { getMediaInfo, searchAniList, getAniListInfoById } = require("../utils/anilistAPI");
 const { getVNInfo, getVNInfoById, searchVNs } = require("../utils/vndbAPI");
-const axios = require("axios"); // Add this for YouTube API calls
-
-// YouTube API configuration
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY; // Add your API key to environment variables
-
-// Function to extract video ID from YouTube URL
-function extractYouTubeVideoId(url) {
-  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : url; // Return the ID or the original string if it's already an ID
-}
-
-// Function to get YouTube video info using YouTube Data API v3
-async function getYouTubeVideoInfo(videoId) {
-  try {
-    const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-      params: {
-        part: 'snippet,contentDetails',
-        id: videoId,
-        key: YOUTUBE_API_KEY
-      }
-    });
-
-    if (response.data.items && response.data.items.length > 0) {
-      const video = response.data.items[0];
-      const snippet = video.snippet;
-      const contentDetails = video.contentDetails;
-      
-      // Parse duration from ISO 8601 format (PT1H2M10S) to seconds
-      const duration = parseDuration(contentDetails.duration);
-      
-      return {
-        title: snippet.title,
-        duration: duration, // in seconds
-        thumbnail: snippet.thumbnails?.high?.url || snippet.thumbnails?.default?.url
-      };
-    }
-    
-    return null;
-  } catch (error) {
-    console.error("YouTube API Error:", error.response?.data || error.message);
-    throw error;
-  }
-}
-
-// Function to parse ISO 8601 duration format to seconds
-function parseDuration(duration) {
-  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return 0;
-  
-  const hours = parseInt(match[1]) || 0;
-  const minutes = parseInt(match[2]) || 0;
-  const seconds = parseInt(match[3]) || 0;
-  
-  return hours * 3600 + minutes * 60 + seconds;
-}
-
-// Function to normalize YouTube URL
-function normalizeYouTubeUrl(inputUrl) {
-  if (!inputUrl) return null;
-  
-  let normalizedUrl = inputUrl.trim();
-  
-  if (normalizedUrl.startsWith('http://') || normalizedUrl.startsWith('https://')) {
-    return normalizedUrl;
-  }
-  
-  if (normalizedUrl.startsWith('www.')) {
-    return `https://${normalizedUrl}`;
-  }
-  
-  if (normalizedUrl.startsWith('youtube.com') || 
-      normalizedUrl.startsWith('youtu.be') || 
-      normalizedUrl.startsWith('m.youtube.com')) {
-    return `https://${normalizedUrl}`;
-  }
-  
-  return `https://youtube.com/watch?v=${normalizedUrl}`;
-}
+const { extractYouTubeVideoId, getYouTubeVideoInfo, normalizeYouTubeUrl } = require("../utils/youtube");
 
 module.exports = {
   name: "immersion",
@@ -120,6 +42,11 @@ module.exports = {
       option
         .setName("comment")
         .setDescription("Komentar atau catatan tambahan")
+        .setRequired(false))
+    .addStringOption(option =>
+      option
+        .setName("date")
+        .setDescription("Tanggal dalam format YYYY-MM-DD (opsional, default: hari ini)")
         .setRequired(false)),
 
   async execute(interaction) {
@@ -171,9 +98,7 @@ module.exports = {
         if (userInput !== 'skip') {
           url = response.content.trim();
           
-          try {
-            // Extract video ID from URL or use the input directly if it's already an ID
-            const videoId = extractYouTubeVideoId(url);
+          const videoId = extractYouTubeVideoId(url);
             
             // Get video info from YouTube API
             const videoInfo = await getYouTubeVideoInfo(videoId);
@@ -200,15 +125,6 @@ module.exports = {
             } catch (err) {
               // Ignore delete errors
             }
-            
-          } catch (err) {
-            console.error("❌ Gagal mengambil info dari YouTube API:", err);
-            await interaction.followUp({
-              content: "❌ Gagal mengambil data video dari YouTube API. Melanjutkan tanpa info video...",
-              ephemeral: true
-            });
-            url = null;
-          }
         } else {
           try {
             await response.delete();
@@ -227,7 +143,6 @@ module.exports = {
 
     // VNDB info logic (unchanged)
     if (title && title !== "-" && media_type === "visual_novel") {
-      try {
         if (title.includes('|')) {
           const [vnTitle, vnId] = title.split('|');
           rawTitle = vnTitle;
@@ -243,14 +158,10 @@ module.exports = {
             thumbnail = vndbInfo.image;
           }
         }
-      } catch (err) {
-        console.error("⚠️ Gagal mengambil info dari VNDB:", err);
-      }
     }
 
     // AniList info logic (unchanged)
     if (title && title !== "-" && ['anime', 'manga'].includes(media_type)) {
-      try {
         if (title.includes('|')) {
           const [aniTitle, aniId] = title.split('|');
           rawTitle = aniTitle;
@@ -267,9 +178,6 @@ module.exports = {
             thumbnail = anilistInfo.image;
           }
         }
-      } catch (err) {
-        console.error("⚠️ Gagal mengambil info dari AniList:", err);
-      }
     }
 
     const unitMap = {
