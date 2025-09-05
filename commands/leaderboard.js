@@ -3,6 +3,14 @@ const db = require("../firebase/firestore");
 const { calculatePoints } = require("../utils/points");
 const { mediaTypeLabelMap, unitMap } = require("../utils/config");
 
+// Timestamp label mapping for leaderboard titles
+const timestampLabelMap = {
+  weekly: "Weekly",
+  monthly: "Monthly",
+  yearly: "Yearly",
+  all_time: "All-time"
+};
+
 
 
 module.exports = {

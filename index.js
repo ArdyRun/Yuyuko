@@ -5,6 +5,7 @@ const path = require("path");
 const handleAyumiCommand = require('./commands/geminiReply'); // Updated import name
 const logCommand = require('./commands/log.js');
 const { checkRank, trackUserQuizStart } = require("./ranked/checkRank");
+const { updateEmojiCache } = require('./utils/emojiCache');
 
 const client = new Client({
     intents: [
@@ -54,6 +55,34 @@ async function deployCommandsToAllGuilds() {
 client.once("ready", async () => {
     console.log(`${client.user.tag} is now online`);
     await deployCommandsToAllGuilds();
+    
+    // Update emoji cache when bot starts
+    console.log('🔄 Updating emoji cache...');
+    await updateEmojiCache(client);
+    console.log('✅ Emoji cache updated');
+});
+
+// Update emoji cache when bot joins a new guild
+client.on("guildCreate", async (guild) => {
+    console.log(`🆕 Bot joined new guild: ${guild.name} (${guild.id})`);
+    console.log('🔄 Updating emoji cache due to new guild...');
+    await updateEmojiCache(client);
+    console.log('✅ Emoji cache updated');
+});
+
+// Update emoji cache when emojis are updated in a guild
+client.on("emojiUpdate", async () => {
+    console.log('🔄 Updating emoji cache due to emoji changes...');
+    await updateEmojiCache(client);
+    console.log('✅ Emoji cache updated');
+});
+
+// Update emoji cache when bot leaves a guild
+client.on("guildDelete", async (guild) => {
+    console.log(`❌ Bot left guild: ${guild.name} (${guild.id})`);
+    console.log('🔄 Updating emoji cache due to guild removal...');
+    await updateEmojiCache(client);
+    console.log('✅ Emoji cache updated');
 });
 
 client.on("interactionCreate", async interaction => {

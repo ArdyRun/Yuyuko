@@ -1,0 +1,405 @@
+{
+  "emojis": [
+    {
+      "id": "1392992207799062661",
+      "name": "dunno",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992215038431423",
+      "name": "finger_wave",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992219811549234",
+      "name": "Fire",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992221422157976",
+      "name": "flame",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992230431654118",
+      "name": "Goodgirl",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992260869849220",
+      "name": "ivarroll",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992286274621451",
+      "name": "kissi",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1392992303072936131",
+      "name": "faier",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008497443995648",
+      "name": "2799_Wave",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008537646534757",
+      "name": "Burn",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008588641009857",
+      "name": "catdance",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008634010796152",
+      "name": "confetti_yey",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008666231312394",
+      "name": "cries",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008714000240671",
+      "name": "crysad",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008757117681854",
+      "name": "dankmemestrigger",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008807520632983",
+      "name": "dfdf",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008811236921374",
+      "name": "dogno",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008814298759277",
+      "name": "duckwaddle",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008822498627594",
+      "name": "excuseme",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008846280069161",
+      "name": "haihai",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008885400469554",
+      "name": "miunacrying",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008900986372187",
+      "name": "orangealert",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393008925875372072",
+      "name": "pepehmm",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393023568060743805",
+      "name": "youtried",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393077954912718928",
+      "name": "ivarroll",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393077960734543902",
+      "name": "Japan",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078094302285924",
+      "name": "pepetoilet",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078107971522640",
+      "name": "ranifiesta",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078243954917416",
+      "name": "sip",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078247247581244",
+      "name": "spinthink",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078684965011538",
+      "name": "thekings",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078714170081441",
+      "name": "Verify",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078721774092448",
+      "name": "wantit",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1393078742900801626",
+      "name": "zolaextasy",
+      "guildId": "1370274344571240552",
+      "guildName": "Philia Space",
+      "animated": true
+    },
+    {
+      "id": "1384171532955422730",
+      "name": "UmaruLaugh",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384172648854065293",
+      "name": "AppJedi",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384173218058997881",
+      "name": "31347bluefire",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384173220743221408",
+      "name": "58346fire",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384173229584945232",
+      "name": "61652murderouscat",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852089490116698",
+      "name": "dr_senku_bubble",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852101611393106",
+      "name": "jinwoo_sololeveling",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852105407365150",
+      "name": "Pepe_King_Animated",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852115322572881",
+      "name": "fading_crying_emoji",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852122847281172",
+      "name": "Flud_Cat_Cry_Screech",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852130350764142",
+      "name": "crown_yellow_gif",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852136218595418",
+      "name": "mWhatOwO",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852148793118791",
+      "name": "zerotwo_party",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852152475713650",
+      "name": "no_anime5",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852157232058470",
+      "name": "PaimonTriggerredPing",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852168552743023",
+      "name": "cortesdemanga",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852172776144937",
+      "name": "JBF_actingSusNotMeOwO",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852180082888765",
+      "name": "CryingManAnimated",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852192699220041",
+      "name": "znyanpantsuremoval",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852196134223922",
+      "name": "saanimegirlshoot",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852202803429477",
+      "name": "RaveWeebTC",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1384852208746627112",
+      "name": "hanyaCheer",
+      "guildId": "1372825232217477131",
+      "guildName": "Bot Testing",
+      "animated": true
+    },
+    {
+      "id": "1387511884726407329",
+      "name": "Animated_Arrow_White",
+      "guildId": "1382352896758251655",
+      "guildName": "cat's friends",
+      "animated": true
+    }
+  ],
+  "lastUpdated": "2025-09-05T01:25:13.301Z",
+  "count": 57
+}
