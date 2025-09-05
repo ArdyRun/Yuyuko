@@ -187,11 +187,6 @@ Track your Japanese learning progress across multiple media types:
   a!ayumi [your message]
   ```
 
-- **`a!ayumi`** - Alternative way to chat with the bot
-  ```
-  a!ayumi [your message]
-  ```
-
 ## 🔧 Configuration
 
 ### Points System

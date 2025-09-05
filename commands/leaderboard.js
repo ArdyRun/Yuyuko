@@ -11,8 +11,6 @@ const timestampLabelMap = {
   all_time: "All-time"
 };
 
-
-
 module.exports = {
   name: "leaderboard",
   data: new SlashCommandBuilder()

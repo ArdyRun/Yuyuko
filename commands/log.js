@@ -151,8 +151,6 @@ function createLogEmbed(logs, page, totalPages, timeframe, user, mediaType = nul
   return embed;
 }
 
-
-
 // Helper function to create navigation buttons with delete buttons
 function createNavigationButtons(page, totalPages, timeframe, mediaType, logs) {
   const rows = [];
