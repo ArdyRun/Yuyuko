@@ -81,68 +81,41 @@ module.exports = {
         });
       }
 
-      const messageLinkRegex = /\/channels\/(\d+)\/(\d+)\/(\d+)/;
-      let channelId, messageId;
-
-      if (messageLinkRegex.test(input)) {
-        const match = input.match(messageLinkRegex);
-        [, , channelId, messageId] = match;
-      } else {
-        if (!/^\d{17,19}$/.test(input.trim())) {
-          return interaction.editReply({
-            content: 'ID pesan tidak valid. Gunakan ID 17–19 digit atau link pesan.',
-            embeds: [],
-            components: []
-          });
-        }
+      // Extract message ID and channel ID from input (URL or ID)
+      let messageId, channelId;
+      
+      // Check if input is a Discord message URL
+      const urlMatch = input.match(/discord\.com\/channels\/\d+\/(\d+)\/(\d+)/);
+      if (urlMatch) {
+        channelId = urlMatch[1];
+        messageId = urlMatch[2];
+      } else if (/^\d{17,19}$/.test(input.trim())) {
+        // If input is just a message ID, use the current channel
         messageId = input.trim();
         channelId = interaction.channelId;
-      }
-
-      if (validEmojis.length === 0) {
+      } else {
         return interaction.editReply({
-          content: 'Emoji animasi tidak ditemukan atau tidak valid.',
+          content: 'Format pesan tidak valid. Harap berikan ID pesan atau link Discord yang valid.',
           embeds: [],
           components: []
         });
       }
 
-      let channel;
-      try {
-        channel = await interaction.client.channels.fetch(channelId);
-        if (!channel || !channel.isTextBased()) throw new Error('Not text-based');
-      } catch {
-        return interaction.editReply({
-          content: 'Channel tidak ditemukan atau bot tidak memiliki akses.',
-          embeds: [],
-          components: []
-        });
-      }
-
+      // Try to fetch the message
       let message;
       try {
+        const channel = await interaction.client.channels.fetch(channelId);
         message = await channel.messages.fetch(messageId);
-        if (!message) throw new Error('Message not found');
-      } catch {
+      } catch (fetchError) {
         return interaction.editReply({
-          content: `Pesan tidak ditemukan di <#${channelId}>.`,
+          content: 'Gagal menemukan pesan. Pastikan ID/link pesan valid dan bot memiliki akses ke channel tersebut.',
           embeds: [],
           components: []
         });
       }
 
-      const botMember = channel.guild?.members.cache.get(interaction.client.user.id);
-      const channelPermissions = channel.permissionsFor(botMember);
-
-      if (!channelPermissions?.has(['ViewChannel', 'AddReactions'])) {
-        return interaction.editReply({
-          content: `Bot tidak memiliki permission untuk mereact di <#${channelId}>.`,
-          embeds: [],
-          components: []
-        });
-      }
-
-      if (Date.now() - message.createdTimestamp > 14 * 24 * 60 * 1000) {
+      // Check if the message is too old (Discord limitation: 14 days)
+      if (Date.now() - message.createdTimestamp > 14 * 24 * 60 * 60 * 1000) {
         return interaction.editReply({
           content: 'Pesan terlalu lama (lebih dari 14 hari) untuk direact.',
           embeds: [],
@@ -317,30 +290,30 @@ module.exports = {
 
         } catch (err) {
           console.error('Gagal handle tombol:', err);
-          await button.reply({ content: 'Terjadi kesalahan saat memproses tombol.', emeraephl: true });
+          await button.reply({ content: 'Terjadi kesalahan saat memproses tombol.', ephemeral: true });
         }
       });
 
-      collector.on('end', async (_, reason) => {
-        if (reason !== 'done') {
-          const timeoutEmbed = new EmbedBuilder()
-            .setTitle('Waktu Habis')
-            .setDescription('Tidak ada emoji yang dipilih dalam 60 detik.')
-            .setColor(0xFF9900)
-            .setTimestamp();
-
-          await interaction.editReply({
-            content: null,
-            embeds: [timeoutEmbed],
-            components: []
-          });
+      // Handle collector end
+      collector.on('end', async (collected, reason) => {
+        // Only clean up if the interaction hasn't been replied to yet
+        if (reason !== 'done' && !interaction.replied && !interaction.deferred) {
+          try {
+            await interaction.editReply({
+              content: '⏰ Sesi react emoji telah berakhir. Silakan jalankan perintah kembali jika ingin mereact pesan.',
+              embeds: [],
+              components: []
+            });
+          } catch (editError) {
+            console.log('Could not edit reply on collector end:', editError.message);
+          }
         }
       });
 
     } catch (error) {
-      console.error('Error utama:', error);
-      const fallback = 'Terjadi kesalahan internal. Silakan coba lagi.';
-
+      console.error('Error in react command:', error);
+      const fallback = '❌ Terjadi kesalahan saat menjalankan perintah react. Silakan coba lagi nanti.';
+      
       try {
         if (interaction.deferred && !interaction.replied) {
           await interaction.editReply({
@@ -360,3 +333,7 @@ module.exports = {
     }
   }
 };
+
+// Add a simple comment to create a change for PR
+// This is a test change to enable creating a pull request
+// Adding another line to ensure we have a meaningful difference
